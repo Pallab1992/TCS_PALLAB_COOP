@@ -9,10 +9,14 @@ namespace LHV.Model
     {
         [Key]
         [Required]
-        public int Stu_ID {get; set;}
-        public string Stu_Name {get; set;}
-        public int Stu_Roll {get; set;}
+        public int StudentID {get; set;}
+        public string StudentName {get; set;}
+        public string StudentRegistrationNo {get; set;}
+        public string StudentRoll {get; set;} 
+        public string StudentAddress {get; set;}
+        public string StudentContactNo {get; set;}
         public int DepartmentID {get; set;}
         public Department Department {get; set;}
+        public ICollection<StudentCourse> StudentCourses {get; set;}
     }
 }

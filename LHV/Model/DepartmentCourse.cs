@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LHV.Model
 {
-    public class Department
+    public class DepartmentCourse
     {
         [Key]
         [Required]
+        public int DepartmentCourseID {get; set;}
         public int DepartmentID {get; set;}
-        public string DepartmentName {get; set;}
-        public string DepartmentCode {get; set;}
-        public ICollection<Student> Student {get; set;}
-        public ICollection<DepartmentCourse> DepartmentCourses {get; set;}
+        public int CourseID {get; set;}
+        public Department Department {get; set;}
+        public Course Course {get; set;}
     }
 }

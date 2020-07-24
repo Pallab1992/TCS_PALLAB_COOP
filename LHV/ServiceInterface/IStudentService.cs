@@ -8,9 +8,14 @@ namespace LHV.Service
 {
     public interface IStudentService
     {
-        Task<Student> GetStudentByID(int Student_ID);
-        Task<int> StudentAdd(Student student);
         Task<int> DepartmentAdd(Department department);
-        Task<List<StudentDeptRecordResponse>> GetAllStudent();
+        Task<int> CourseAdd (Course course);
+        Task<int> AssignDepToCourse (DepartmentCourse depcourse);
+        Task<int> StudentAdd(AddStudentRequest studentReq);
+        Task<int> StudentUpdate(UpdateStudentRequest studentUpdtReq);
+        Task<int> AssignCourseToStudent(AssignCourseToStudentRequest assignReq);
+        Task<Course> GetCourseByCode(string courseCode);
+        Task<List<Course>> GetAllCourse();
+        Task<GetAllDepartmentResponse> GetDeptByCode(string deptCode);
     }
 }
