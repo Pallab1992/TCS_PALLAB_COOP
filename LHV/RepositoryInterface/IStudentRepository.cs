@@ -23,6 +23,6 @@ namespace LHV.Repository
     Task<Department> IfDeptExist (string deptCode);
     Task<DepartmentCourse> CheckForDuplicateDepForCourse(int deptID, int courseID);
     Task<List<Course>> GetAllCourse();
-    Task<List<string>> GetCourseList(int deptID);
+    Task<string[]> GetCourseList(int deptID);
   }
 }

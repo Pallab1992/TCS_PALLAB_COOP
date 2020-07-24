@@ -6,7 +6,7 @@ namespace LHV.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var RegistrationGenerationTrigger = @"CREATE TRIGGER StudentRegistrationRollNoGenerator ON Student 
+            var RegistrationGenerationTrigger = @"ALTER TRIGGER StudentRegistrationRollNoGenerator ON [dbo].[Student] 
                                                 INSTEAD OF INSERT
                                                 AS
                                                 DECLARE @StuNO INT;
@@ -24,14 +24,14 @@ namespace LHV.Migrations
                                                 SET @StuNO = (SELECT COUNT(*) FROM Student);
                                                 SELECT @DepmntID = DepartmentID FROM inserted;
                                                 SELECT @DeptCode = DepartmentCode FROM Department WHERE DepartmentID = @DepmntID;
-                                                SET @RegNo = YEAR(GETDATE())+''+@DeptCode+''+@StuNO;
-                                                SET @RollNo = YEAR(GETDATE())+''+@StuNO;
+                                                SET @RegNo = CONVERT(VARCHAR,GETDATE(),12)+''+@DeptCode+''+CONVERT(VARCHAR,@StuNO);
+                                                SET @RollNo = CONVERT(VARCHAR,GETDATE(),12)+''+CONVERT(VARCHAR,@StuNO);
                                                 SET @RegisFinal = @RegNo+''+REPLICATE('0',15-LEN(@RegNo));
-                                                SET @RollFinal = @RollNo+''+REPLICATE('0',10-LEN(@RollFinal));
+                                                SET @RollFinal = @RollNo+''+REPLICATE('0',10-LEN(@RollNo));
                                                 SELECT @StuName = StudentName FROM inserted;
                                                 SELECT @StuAddress = StudentAddress FROM inserted;
                                                 SELECT @StuContact = StudentContactNo FROM inserted;
-                                                INSERT INTO Students (StudentName, StudentRegistrationNo, StudentRoll, StudentAddress, StudentContactNo, DepartmentID) VALUES (@StuName,@RegisFinal,@RollFinal,@StuAddress,@StuContact,@DepmntID);
+                                                INSERT INTO [dbo].[Student] (StudentName, StudentRegistrationNo, StudentRoll, StudentAddress, StudentContactNo, DepartmentID) VALUES (@StuName,@RegisFinal,@RollFinal,@StuAddress,@StuContact,@DepmntID);
                                                 END";
             migrationBuilder.Sql(RegistrationGenerationTrigger);
         }

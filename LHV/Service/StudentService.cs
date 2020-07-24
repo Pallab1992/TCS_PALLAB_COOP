@@ -297,16 +297,16 @@ namespace LHV.Service
                     if (deptResult != null)
                     {
                         var courseList = await _studentrepository.GetCourseList(deptResult.DepartmentID);
-                        var courseList1 = courseList.ToArray();
                         if (courseList != null)
                         {
-                            GetAllDepartmentResponse getResult = new GetAllDepartmentResponse();
+                            GetAllDepartmentResponse getResult = new GetAllDepartmentResponse();   
                             getResult.DepartmentIDResp = deptResult.DepartmentID;
                             getResult.DepartmentNameResp = deptResult.DepartmentName;
                             getResult.DepartmentCodeResp = deptResult.DepartmentCode;
-                            for(int count = 0; count < courseList1.Length; count++)
+                            getResult.CourseNameResp = new string[courseList.Length];
+                            for(int count = 0; count < courseList.Length; count++)
                             {
-                                getResult.CourseNameResp[count] = courseList1[count];
+                                getResult.CourseNameResp[count] = courseList[count];
                             }
                             return getResult;
                         }

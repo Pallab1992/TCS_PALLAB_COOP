@@ -182,7 +182,7 @@ namespace LHV.Repository {
             }
         }
 
-        public async Task<List<string>> GetCourseList(int deptID)
+        public async Task<string[]> GetCourseList(int deptID)
         {
             try{
                 var reponse = await _dbcontext.DepartmentCourse.Where(dp=> dp.DepartmentID == deptID).ToListAsync();
@@ -193,7 +193,7 @@ namespace LHV.Repository {
                     var resFinal = result.FirstOrDefault();
                     str[count] = resFinal.CourseName;
                 }
-                return str.ToList();
+                return str;
             }
             catch (Exception ex)
             {
